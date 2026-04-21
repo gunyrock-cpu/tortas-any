@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tortas Any — Panadería Artesanal · Puente Alto</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF6EE;
+    --warm-white: #FFFDF8;
+    --brown: #5C3D2E;
+    --brown-light: #8B5E48;
+    --brown-dark: #3A2318;
+    --gold: #C8963E;
+    --gold-light: #E8B96A;
+    --text: #2C1A0E;
+    --text-muted: #7A5C4A;
+    --border: #E8D9C8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background-color: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 2.5rem;
+    background: rgba(250, 246, 238, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--brown-dark);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--brown); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 7rem 2rem 4rem;
+    position: relative;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(200, 150, 62, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(92, 61, 46, 0.06) 0%, transparent 50%);
+  }
+
+  .hero-ornament {
+    font-size: 2rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    opacity: 0.7;
+    animation: fadeDown 1s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    font-weight: 600;
+    color: var(--brown-dark);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    animation: fadeDown 1s 0.1s ease both;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-tagline {
+    margin-top: 1.2rem;
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    animation: fadeDown 1s 0.2s ease both;
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 1.8rem auto;
+    animation: fadeDown 1s 0.3s ease both;
+  }
+
+  .hero-desc {
+    max-width: 480px;
+    margin: 0 auto;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    font-weight: 300;
+    animation: fadeDown 1s 0.4s ease both;
+  }
+
+  .hero-cta {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeDown 1s 0.5s ease both;
+  }
+
+  .btn-primary {
+    background: var(--brown);
+    color: var(--cream);
+    padding: 0.85rem 2.2rem;
+    border: none;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--brown-dark); transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--brown);
+    padding: 0.85rem 2.2rem;
+    border: 1.5px solid var(--brown);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover { background: var(--brown); color: var(--cream); }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 2rem; position: relative; }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+    text-align: center;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    color: var(--brown-dark);
+    text-align: center;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  .section-subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    font-weight: 300;
+    font-size: 1rem;
+    max-width: 500px;
+    margin: 0 auto 3.5rem;
+    line-height: 1.7;
+  }
+
+  /* ── PRODUCTOS ── */
+  #productos { background: var(--warm-white); }
+
+  .productos-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+  }
+
+  .producto-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: default;
+  }
+
+  .producto-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(92, 61, 46, 0.12);
+  }
+
+  .producto-img-wrap {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    background: var(--border);
+    display: block;
+  }
+
+  .producto-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .producto-card:hover .producto-img {
+    transform: scale(1.04);
+  }
+
+  .producto-img-placeholder {
+    width: 100%;
+    height: 220px;
+    background: linear-gradient(135deg, #EDE0D0 0%, #D9C4A8 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .producto-img-placeholder svg {
+    opacity: 0.35;
+  }
+
+  .placeholder-text {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    opacity: 0.7;
+  }
+
+  .producto-info {
+    padding: 1.3rem 1.5rem 1.5rem;
+  }
+
+  .producto-tag {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+
+  .producto-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--brown-dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .producto-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .producto-badge {
+    display: inline-block;
+    margin-top: 0.8rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    background: var(--brown-dark);
+    color: var(--cream);
+  }
+
+  /* ── GALERÍA ── */
+  #galeria { background: var(--cream); }
+
+  .galeria-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.6rem;
+  }
+
+  .galeria-item {
+    overflow: hidden;
+    background: var(--border);
+    cursor: pointer;
+    aspect-ratio: 1 / 1;
+  }
+
+  .galeria-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.35s ease;
+  }
+
+  .galeria-item:hover img { transform: scale(1.06); }
+
+  @media (max-width: 768px) {
+    .galeria-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .galeria-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ── NOSOTROS ── */
+  #nosotros {
+    background: var(--brown-dark);
+    color: var(--cream);
+  }
+
+  .nosotros-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  #nosotros .section-label { color: var(--gold-light); }
+  #nosotros .section-title { color: var(--cream); }
+
+  .nosotros-text {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    font-weight: 300;
+    color: rgba(250,246,238,0.8);
+    margin-bottom: 1.5rem;
+  }
+
+  .valores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .valor {
+    padding: 1.5rem 1rem;
+    border: 1px solid rgba(200,150,62,0.3);
+    text-align: center;
+  }
+
+  .valor-icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.6rem;
+    color: var(--gold-light);
+    display: block;
+  }
+
+  .valor-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--cream);
+    margin-bottom: 0.4rem;
+  }
+
+  .valor-desc {
+    font-size: 0.82rem;
+    color: rgba(250,246,238,0.6);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  /* ── PEDIDOS ── */
+  #pedidos { background: var(--warm-white); }
+
+  .pedidos-inner {
+    max-width: 650px;
+    margin: 0 auto;
+  }
+
+  .pedidos-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .pedido-dato {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    padding: 1.2rem 1.3rem;
+    text-align: center;
+  }
+
+  .pedido-dato-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+
+  .pedido-dato-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--brown-dark);
+  }
+
+  .form-group { margin-bottom: 1.2rem; }
+
+  .form-group label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--brown-light);
+  }
+
+  .form-group textarea { resize: vertical; min-height: 100px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--brown-dark);
+    color: var(--cream);
+    text-align: center;
+    padding: 3rem 2rem;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--cream);
+  }
+
+  .footer-logo em { font-style: italic; color: var(--gold-light); }
+
+  .footer-tagline {
+    font-size: 0.78rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(250,246,238,0.5);
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    list-style: none;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(250,246,238,0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--gold-light); }
+
+  .footer-copy {
+    font-size: 0.78rem;
+    color: rgba(250,246,238,0.3);
+    font-weight: 300;
+  }
+
+  .footer-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 1rem auto;
+    opacity: 0.4;
+  }
+
+  /* ── WHATSAPP FLOAT ── */
+  .wa-float {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 54px;
+    height: 54px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    z-index: 200;
+    text-decoration: none;
+    transition: transform 0.2s;
+  }
+
+  .wa-float:hover { transform: scale(1.08); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    nav { padding: 1rem 1.2rem; }
+    .nav-links { display: none; }
+    .galeria-grid { grid-template-columns: 1fr 1fr; }
+    .galeria-item.grande { grid-column: span 2; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Tortas <em style="font-style:italic;color:var(--gold);">Any</em></span>
+  <ul class="nav-links">
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#pedidos">Pedidos</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-ornament">✦</div>
+    <h1>Tortas <em>Any</em></h1>
+    <p class="hero-tagline">Panadería artesanal · Puente Alto</p>
+    <div class="hero-divider"></div>
+    <p class="hero-desc">
+      Horneado con amor, recetas tradicionales y los mejores ingredientes.
+      Pan amasado, queques, tortillas y tortas hechas a mano para ti y tu familia.
+    </p>
+    <div class="hero-cta">
+      <a href="#productos" class="btn-primary">Ver productos</a>
+      <a href="#pedidos" class="btn-outline">Hacer un pedido</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTOS -->
+<section id="productos">
+  <p class="section-label">Lo que ofrecemos</p>
+  <h2 class="section-title">Nuestros <em>productos</em></h2>
+  <p class="section-subtitle">Elaborados cada día con ingredientes frescos, sin conservantes ni aditivos.</p>
+
+  <div class="productos-grid">
+
+    <!-- Producto 1 -->
+    <div class="producto-card fade-in">
+      <div class="producto-img-wrap">
+        <img src="images/Pan Amasado.png" alt="Pan amasado artesanal" class="producto-img">
+      </div>
+      <div class="producto-info">
+        <span class="producto-tag">Del día</span>
+        <h3 class="producto-name">Pan amasado</h3>
+        <p class="producto-desc">Receta tradicional, suave por dentro y dorado por fuera. Ideal para el desayuno o la once.</p>
+      </div>
+    </div>
+
+    <!-- Producto 2 -->
+    <div class="producto-card fade-in">
+      <div class="producto-img-wrap">
+        <img src="images/Queque casero.png" alt="Queque casero" class="producto-img">
+      </div>
+      <div class="producto-info">
+        <span class="producto-tag">Del día</span>
+        <h3 class="producto-name">Queque casero</h3>
+        <p class="producto-desc">Esponjoso, con pasas o frutas confitadas. Como el que hacía la abuela.</p>
+      </div>
+    </div>
+
+    <!-- Producto 3 -->
+    <div class="producto-card fade-in">
+      <div class="producto-img-wrap">
+        <img src="images/Tortillas con chicharrones.png" alt="Tortillas con chicharrones" class="producto-img">
+      </div>
+      <div class="producto-info">
+        <span class="producto-tag">Del día</span>
+        <h3 class="producto-name">Tortillas con chicharrones</h3>
+        <p class="producto-desc">Crujientes, sabrosas y generosas. Un clásico de la panadería chilena.</p>
+      </div>
+    </div>
+
+    <!-- Producto 4 -->
+    <div class="producto-card fade-in">
+      <div class="producto-img-wrap">
+        <img src="images/Pan de pascua.png" alt="Pan de Pascua" class="producto-img">
+      </div>
+      <div class="producto-info">
+        <span class="producto-tag">Temporada</span>
+        <h3 class="producto-name">Pan de pascua</h3>
+        <p class="producto-desc">Cargado de frutas, nueces y especias. La tradición navideña de siempre.</p>
+        <span class="producto-badge">Temporada</span>
+      </div>
+    </div>
+
+    <!-- Producto 5 -->
+    <div class="producto-card fade-in">
+      <div class="producto-img-wrap">
+        <img src="images/Fotos Galeria 02.png" alt="Tortas decoradas" class="producto-img">
+      </div>
+      <div class="producto-info">
+        <span class="producto-tag">A pedido</span>
+        <h3 class="producto-name">Tortas decoradas</h3>
+        <p class="producto-desc">Cumpleaños, aniversarios, reuniones. Diseño y sabor a tu medida. Pide con anticipación.</p>
+        <span class="producto-badge">A pedido</span>
+      </div>
+    </div>
+
+    <!-- Producto 6 -->
+    <div class="producto-card fade-in">
+      <div class="producto-img-wrap">
+        <img src="images/Kuchen & Pie de limón.png" alt="Kuchen y Pie de limón" class="producto-img">
+      </div>
+      <div class="producto-info">
+        <span class="producto-tag">A pedido</span>
+        <h3 class="producto-name">Kuchen & Pie de limón</h3>
+        <p class="producto-desc">Recetas alemanas y clásicas con fruta de temporada o crema de limón. Perfectos para reuniones.</p>
+        <span class="producto-badge">A pedido</span>
+      </div>
+    </div>
+
+    <!-- Producto 7 -->
+    <div class="producto-card fade-in">
+      <div class="producto-img-wrap">
+        <img src="images/Empanadas de horno.png" alt="Empanadas de horno" class="producto-img">
+      </div>
+      <div class="producto-info">
+        <span class="producto-tag">Temporada</span>
+        <h3 class="producto-name">Empanadas de horno</h3>
+        <p class="producto-desc">Masa hecha a mano, relleno generoso. Doradas al horno, crujientes por fuera y jugosas por dentro.</p>
+        <span class="producto-badge">Temporada</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section id="galeria">
+  <p class="section-label">Nuestro trabajo</p>
+  <h2 class="section-title">La <em>galería</em></h2>
+  <p class="section-subtitle">Aquí irán apareciendo fotos de nuestros productos y creaciones especiales.</p>
+
+  <div class="galeria-grid fade-in">
+    <div class="galeria-item"><img src="images/Fotos Galeria 01.png" alt="Galería Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 03.png" alt="Galería Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 04.png" alt="Galería Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 05.png" alt="Galería Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 06.png" alt="Galería Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 07.png" alt="Galería Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 08.png" alt="Galería Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 09.png" alt="Galería Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 10.png" alt="Galería Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 12.png" alt="Galería Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 14.png" alt="Galería Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 15.png" alt="Galería Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 16.png" alt="Galería Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 02.png" alt="Galería Tortas Any"></div>
+  </div>
+</section>
+
+<!-- NOSOTROS -->
+<section id="nosotros">
+  <div class="nosotros-inner fade-in">
+    <p class="section-label">Nuestra historia</p>
+    <h2 class="section-title">Hecho con <em>amor</em></h2>
+    <p class="nosotros-text">
+      Somos una panadería artesanal familiar ubicada en Puente Alto. Cada producto que sale de nuestras manos 
+      lleva recetas cuidadas, ingredientes seleccionados y mucho cariño. Creemos que el buen pan y los buenos 
+      dulces tienen el poder de reunir a las familias.
+    </p>
+    <p class="nosotros-text">
+      Vendemos directamente, sin intermediarios, para que siempre llegues a lo más fresco y a un precio justo.
+    </p>
+    <div class="valores-grid">
+      <div class="valor">
+        <span class="valor-icon">✦</span>
+        <p class="valor-title">Artesanal</p>
+        <p class="valor-desc">Cada pieza hecha a mano, sin procesos industriales.</p>
+      </div>
+      <div class="valor">
+        <span class="valor-icon">✦</span>
+        <p class="valor-title">Fresco</p>
+        <p class="valor-desc">Horneado el mismo día, sin conservantes.</p>
+      </div>
+      <div class="valor">
+        <span class="valor-icon">✦</span>
+        <p class="valor-title">Local</p>
+        <p class="valor-desc">De Puente Alto para Puente Alto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PEDIDOS -->
+<section id="pedidos">
+  <p class="section-label">Contáctanos</p>
+  <h2 class="section-title">Haz tu <em>pedido</em></h2>
+  <p class="section-subtitle">Para tortas, kuchen y pie de limón se requiere mínimo 48 horas de anticipación.</p>
+
+  <div class="pedidos-inner fade-in">
+    <div class="pedidos-info">
+      <div class="pedido-dato">
+        <p class="pedido-dato-label">Teléfono</p>
+        <p class="pedido-dato-val">+56 9 XXXX XXXX</p>
+      </div>
+      <div class="pedido-dato">
+        <p class="pedido-dato-label">Horario</p>
+        <p class="pedido-dato-val">Lun – Sáb 8:00–20:00</p>
+      </div>
+      <div class="pedido-dato">
+        <p class="pedido-dato-label">Ubicación</p>
+        <p class="pedido-dato-val">Puente Alto, RM</p>
+      </div>
+    </div>
+
+    <form onsubmit="enviarPedido(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" placeholder="Tu nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="telefono">Teléfono</label>
+          <input type="tel" id="telefono" placeholder="+56 9 XXXX XXXX" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="producto">Producto</label>
+        <select id="producto" required>
+          <option value="">Selecciona un producto...</option>
+          <option>Pan amasado</option>
+          <option>Queque casero</option>
+          <option>Tortillas con chicharrones</option>
+          <option>Pan de pascua</option>
+          <option>Empanadas de horno</option>
+          <option>Torta decorada (a pedido)</option>
+          <option>Kuchen (a pedido)</option>
+          <option>Pie de limón (a pedido)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="mensaje">Detalle del pedido</label>
+        <textarea id="mensaje" placeholder="Cuéntanos cantidad, fecha de entrega, diseño si es torta, etc."></textarea>
+      </div>
+      <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">Enviar por WhatsApp</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-logo">Tortas <em>Any</em></p>
+  <p class="footer-tagline">Panadería artesanal · Puente Alto</p>
+  <div class="footer-divider"></div>
+  <ul class="footer-links">
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#pedidos">Pedidos</a></li>
+  </ul>
+  <p class="footer-copy">&copy; 2025 Tortas Any — Todos los derechos reservados</p>
+</footer>
+
+<!-- WhatsApp flotante -->
+<a href="https://wa.me/56900000000?text=Hola%2C%20quiero%20hacer%20un%20pedido" class="wa-float" target="_blank" title="Escríbenos por WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  function enviarPedido(e) {
+    e.preventDefault();
+    const nombre = document.getElementById('nombre').value;
+    const telefono = document.getElementById('telefono').value;
+    const producto = document.getElementById('producto').value;
+    const mensaje = document.getElementById('mensaje').value;
+    const texto = `Hola Tortas Any! Mi nombre es ${nombre} (${telefono}). Quiero pedir: ${producto}. Detalle: ${mensaje}`;
+    window.open('https://wa.me/56900000000?text=' + encodeURIComponent(texto), '_blank');
+  }
+</script>
+</body>
+</html>
