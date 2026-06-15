@@ -680,6 +680,7 @@
   <ul class="nav-links">
     <li><a href="#productos">Productos</a></li>
     <li><a href="#galeria">Galería</a></li>
+    <li><a href="#tortas">Tortas</a></li>
     <li><a href="#nosotros">Nosotros</a></li>
     <li><a href="#pedidos">Pedidos</a></li>
   </ul>
@@ -1026,7 +1027,7 @@
   rellenos.forEach(r=>{
     const d=document.createElement('div');
     d.style.cssText='background:#fff;border:0.5px solid #E8D9C8;border-radius:10px;overflow:hidden;font-family:sans-serif';
-    d.innerHTML=`<img src="${r.img}" alt="${r.n}" loading="lazy" style="width:100%;height:64px;object-fit:cover;display:block;background:#EDE0D0" onerror="this.style.background='#EDE0D0';this.style.height='64px'"><div style="padding:.4rem .55rem .5rem"><p style="font-size:11px;color:#3A2318;font-weight:500;line-height:1.3">${r.n}</p>${r.sub?`<p style="font-size:10px;color:#8B5E48;margin-top:1px">${r.sub}</p>`:''}</div>`;
+    d.innerHTML=`<img src="${r.img}" alt="${r.n}" loading="lazy" style="width:100%;height:84px;object-fit:contain;display:block;background:#F7F3ED"><div style="padding:.4rem .55rem .5rem"><p style="font-size:11px;color:#3A2318;font-weight:500;line-height:1.3">${r.n}</p>${r.sub?`<p style="font-size:10px;color:#8B5E48;margin-top:1px">${r.sub}</p>`:''}</div>`;
     grid.appendChild(d);
   });
 })();
