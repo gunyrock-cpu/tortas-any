@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tortas Any — Negocio Familiar · Puente Alto</title>
+<title>Amasados y Tortas Any — Negocio Familiar · Puente Alto</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -86,7 +86,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 11rem 2rem 4rem;
+    padding: 4rem 2rem 4rem;
     position: relative;
     background:
       radial-gradient(ellipse at 20% 50%, rgba(200, 150, 62, 0.08) 0%, transparent 60%),
@@ -114,6 +114,15 @@
   .hero h1 em {
     font-style: italic;
     color: var(--gold);
+  }
+
+  .hero-title-img {
+    display: block;
+    width: 100%;
+    max-width: 620px;
+    height: auto;
+    margin: 0 auto;
+    animation: fadeDown 1s 0.1s ease both;
   }
 
   .hero-tagline {
@@ -681,11 +690,8 @@
     gap: 1rem;
     flex-wrap: wrap;
     border-bottom: 2px solid var(--gold);
-    position: fixed;
-    top: 72px;
-    left: 0;
-    right: 0;
-    z-index: 99;
+    position: relative;
+    margin-top: 72px;
   }
   .banner-b2b-left { display: flex; align-items: center; gap: 0.8rem; }
   .banner-b2b-icon { font-size: 1.2rem; flex-shrink: 0; }
@@ -724,17 +730,91 @@
   }
   .banner-b2b-btn:hover { background: #E8B96A; transform: translateY(-1px); }
   .banner-b2b-right { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-  .visit-counter {
-    font-size: 0.67rem;
-    color: rgba(250,246,238,0.4);
-    font-family: 'Lato', sans-serif;
-    letter-spacing: 0.06em;
-    white-space: nowrap;
-  }
-  .visit-counter strong { color: var(--gold); font-weight: 700; }
   @media (max-width: 640px) {
     .banner-b2b { padding: 0.6rem 1rem; }
     .banner-b2b-sub { display: none; }
+  }
+
+  /* ── CARRUSEL HERO — Nuestros productos ── */
+  .hero-carousel {
+    position: relative;
+    max-width: 720px;
+    margin: 2rem auto 0;
+    animation: fadeDown 1s 0.15s ease both;
+  }
+  .hero-carousel-viewport {
+    overflow: hidden;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: var(--warm-white);
+    box-shadow: 0 12px 30px rgba(58,35,24,0.12);
+  }
+  .hero-carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+  .hero-carousel-slide {
+    flex: 0 0 100%;
+    position: relative;
+  }
+  .hero-carousel-slide img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+  }
+  .hero-carousel-caption {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 1.6rem 1.2rem 0.9rem;
+    background: linear-gradient(to top, rgba(58,35,24,0.85), transparent);
+    color: var(--cream);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    text-align: left;
+  }
+  .hero-carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(250,246,238,0.85);
+    color: var(--brown-dark);
+    border: 1px solid var(--border);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.15s;
+    z-index: 2;
+  }
+  .hero-carousel-btn:hover { background: var(--gold); color: var(--cream); }
+  .hero-carousel-btn.prev { left: 12px; }
+  .hero-carousel-btn.next { right: 12px; }
+  .hero-carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 0.9rem;
+  }
+  .hero-carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .hero-carousel-dot.active { background: var(--gold); transform: scale(1.2); }
+  @media (max-width: 640px) {
+    .hero-carousel-slide img { height: 220px; }
+    .hero-carousel-caption { font-size: 1rem; padding: 1.2rem 0.9rem 0.7rem; }
   }
 </style>
 </head>
@@ -742,7 +822,7 @@
 
 <!-- NAV -->
 <nav>
-  <span class="nav-logo">Tortas <em style="font-style:italic;color:var(--gold);">Any</em></span>
+  <span class="nav-logo">Amasados y Tortas <em style="font-style:italic;color:var(--gold);">Any</em></span>
   <ul class="nav-links">
     <li><a href="#productos">Productos</a></li>
     <li><a href="#galeria">Galería</a></li>
@@ -767,14 +847,53 @@
       <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       Quiero ser partner
     </a>
-    <div class="visit-counter">👁 <strong id="visit-num">—</strong> visitas</div>
   </div>
 </div>
 <!-- HERO -->
 <section class="hero">
   <div>
     <div class="hero-ornament">✦</div>
-    <h1>Tortas <em>Any</em></h1>
+    <img src="images/Logo Amasados y Tortas Any.png" alt="Amasados y Tortas Any" class="hero-title-img">
+
+    <!-- CARRUSEL — Nuestros productos -->
+    <div class="hero-carousel" id="heroCarousel">
+      <div class="hero-carousel-viewport">
+        <div class="hero-carousel-track" id="heroCarouselTrack">
+          <div class="hero-carousel-slide">
+            <img src="images/Pan Amasado.png" alt="Pan amasado artesanal">
+            <div class="hero-carousel-caption">Pan amasado</div>
+          </div>
+          <div class="hero-carousel-slide">
+            <img src="images/Queque casero.png" alt="Queque casero">
+            <div class="hero-carousel-caption">Queque casero</div>
+          </div>
+          <div class="hero-carousel-slide">
+            <img src="images/Tortillas con chicharrones.png" alt="Tortillas con chicharrones">
+            <div class="hero-carousel-caption">Tortillas con chicharrones</div>
+          </div>
+          <div class="hero-carousel-slide">
+            <img src="images/Pan de pascua.png" alt="Pan de Pascua">
+            <div class="hero-carousel-caption">Pan de pascua</div>
+          </div>
+          <div class="hero-carousel-slide">
+            <img src="images/Fotos Galeria 02.png" alt="Tortas decoradas">
+            <div class="hero-carousel-caption">Tortas decoradas</div>
+          </div>
+          <div class="hero-carousel-slide">
+            <img src="images/Kuchen & Pie de limón.png" alt="Kuchen y Pie de limón">
+            <div class="hero-carousel-caption">Kuchen &amp; Pie de limón</div>
+          </div>
+          <div class="hero-carousel-slide">
+            <img src="images/Empanadas de horno.png" alt="Empanadas de horno">
+            <div class="hero-carousel-caption">Empanadas de horno</div>
+          </div>
+        </div>
+      </div>
+      <button class="hero-carousel-btn prev" onclick="heroCarouselMove(-1)" aria-label="Producto anterior">‹</button>
+      <button class="hero-carousel-btn next" onclick="heroCarouselMove(1)" aria-label="Producto siguiente">›</button>
+      <div class="hero-carousel-dots" id="heroCarouselDots"></div>
+    </div>
+
     <p class="hero-tagline">Negocio Familiar · Puente Alto</p>
     <div class="hero-divider"></div>
     <p class="hero-desc">
@@ -894,20 +1013,20 @@
   <p class="section-subtitle">Aquí les presentamos fotos de nuestros productos y creaciones especiales.</p>
 
   <div class="galeria-grid fade-in">
-    <div class="galeria-item"><img src="images/Fotos Galeria 01.png" alt="Galería Tortas Any"></div>
-    <div class="galeria-item"><img src="images/Fotos Galeria 03.png" alt="Galería Tortas Any"></div>
-    <div class="galeria-item"><img src="images/Fotos Galeria 04.png" alt="Galería Tortas Any"></div>
-    <div class="galeria-item"><img src="images/Fotos Galeria 05.png" alt="Galería Tortas Any"></div>
-    <div class="galeria-item"><img src="images/Fotos Galeria 06.png" alt="Galería Tortas Any"></div>
-    <div class="galeria-item"><img src="images/Fotos Galeria 07.png" alt="Galería Tortas Any"></div>
-    <div class="galeria-item"><img src="images/Fotos Galeria 08.png" alt="Galería Tortas Any"></div>
-    <div class="galeria-item"><img src="images/Fotos Galeria 09.png" alt="Galería Tortas Any"></div>
-    <div class="galeria-item"><img src="images/Fotos Galeria 10.png" alt="Galería Tortas Any"></div>
-    <div class="galeria-item"><img src="images/Fotos Galeria 12.png" alt="Galería Tortas Any"></div>
-    <div class="galeria-item"><img src="images/Fotos Galeria 14.png" alt="Galería Tortas Any"></div>
-    <div class="galeria-item"><img src="images/Fotos Galeria 15.png" alt="Galería Tortas Any"></div>
-    <div class="galeria-item"><img src="images/Fotos Galeria 16.png" alt="Galería Tortas Any"></div>
-    <div class="galeria-item"><img src="images/Fotos Galeria 02.png" alt="Galería Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 01.png" alt="Galería Amasados y Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 03.png" alt="Galería Amasados y Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 04.png" alt="Galería Amasados y Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 05.png" alt="Galería Amasados y Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 06.png" alt="Galería Amasados y Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 07.png" alt="Galería Amasados y Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 08.png" alt="Galería Amasados y Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 09.png" alt="Galería Amasados y Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 10.png" alt="Galería Amasados y Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 12.png" alt="Galería Amasados y Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 14.png" alt="Galería Amasados y Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 15.png" alt="Galería Amasados y Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 16.png" alt="Galería Amasados y Tortas Any"></div>
+    <div class="galeria-item"><img src="images/Fotos Galeria 02.png" alt="Galería Amasados y Tortas Any"></div>
   </div>
 </section>
 
@@ -1178,7 +1297,7 @@
         allowfullscreen
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
-        title="Ubicación Tortas Any — Puente Alto">
+        title="Ubicación Amasados y Tortas Any — Puente Alto">
       </iframe>
       <a href="https://www.google.com/maps?q=-33.590448,-70.585588" target="_blank" class="mapa-link">
         Abrir en Google Maps →
@@ -1221,7 +1340,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <p class="footer-logo">Tortas <em>Any</em></p>
+  <p class="footer-logo">Amasados y Tortas <em>Any</em></p>
   <p class="footer-tagline">Negocio familiar · Puente Alto</p>
   <div class="footer-divider"></div>
   <ul class="footer-links">
@@ -1230,7 +1349,7 @@
     <li><a href="#nosotros">Nosotros</a></li>
     <li><a href="#pedidos">Pedidos</a></li>
   </ul>
-  <p class="footer-copy">&copy; 2025 Tortas Any — Todos los derechos reservados</p>
+  <p class="footer-copy">&copy; 2025 Amasados y Tortas Any — Todos los derechos reservados</p>
 </footer>
 
 <!-- LIGHTBOX -->
@@ -1256,7 +1375,7 @@
     const telefono = document.getElementById('telefono').value;
     const producto = document.getElementById('producto').value;
     const mensaje = document.getElementById('mensaje').value;
-    const texto = `Hola Tortas Any! Mi nombre es ${nombre} (${telefono}). Quiero pedir: ${producto}. Detalle: ${mensaje}`;
+    const texto = `Hola Amasados y Tortas Any! Mi nombre es ${nombre} (${telefono}). Quiero pedir: ${producto}. Detalle: ${mensaje}`;
     window.open('https://wa.me/56985191970?text=' + encodeURIComponent(texto), '_blank');
   }
 
@@ -1276,6 +1395,55 @@
 
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
+  /* ── CARRUSEL HERO — Nuestros productos ── */
+  (function () {
+    const track = document.getElementById('heroCarouselTrack');
+    const dotsWrap = document.getElementById('heroCarouselDots');
+    const carousel = document.getElementById('heroCarousel');
+    if (!track || !dotsWrap || !carousel) return;
+
+    const slides = track.children.length;
+    let current = 0;
+    let timer = null;
+
+    for (let i = 0; i < slides; i++) {
+      const dot = document.createElement('button');
+      dot.className = 'hero-carousel-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Ir a producto ' + (i + 1));
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    }
+
+    function update() {
+      track.style.transform = `translateX(-${current * 100}%)`;
+      dotsWrap.querySelectorAll('.hero-carousel-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    function goTo(i) {
+      current = (i + slides) % slides;
+      update();
+      resetAutoplay();
+    }
+
+    window.heroCarouselMove = (dir) => goTo(current + dir);
+
+    function startAutoplay() {
+      timer = setInterval(() => goTo(current + 1), 4000);
+    }
+    function resetAutoplay() {
+      clearInterval(timer);
+      startAutoplay();
+    }
+
+    carousel.addEventListener('mouseenter', () => clearInterval(timer));
+    carousel.addEventListener('mouseleave', startAutoplay);
+
+    update();
+    startAutoplay();
+  })();
+
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.galeria-item img').forEach(img => {
       img.addEventListener('click', () => openLightbox(img.src, img.alt));
@@ -1285,17 +1453,6 @@
     });
   });
 
-  /* ── CONTADOR DE VISITAS ── */
-  (async () => {
-    try {
-      const res = await fetch('https://api.countapi.xyz/hit/tortasany/visitas-v1');
-      if (res.ok) {
-        const data = await res.json();
-        const el = document.getElementById('visit-num');
-        if (el && data.value) el.textContent = data.value.toLocaleString('es-CL');
-      }
-    } catch(e) { /* silencioso */ }
-  })();
 </script>
 </body>
 </html>
